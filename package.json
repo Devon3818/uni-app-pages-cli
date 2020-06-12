@@ -1,0 +1,32 @@
+{
+  "name": "uni-app-pages-cli",
+  "version": "0.0.3",
+  "description": "uni-app pages cli",
+  "main": "index.js",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^5.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "uni-add": "./bin/uni-add.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kongdewen1994/uni-app-pages-cli.git"
+  },
+  "keywords": [
+    "uni-cli",
+    "uni-app",
+    "uni-app-pages-cli"
+  ],
+  "author": "Devon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kongdewen1994/uni-app-pages-cli/issues"
+  },
+  "homepage": "https://github.com/kongdewen1994/uni-app-pages-cli#readme"
+}
