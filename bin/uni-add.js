@@ -5,6 +5,7 @@ const { resolve } = require('path')
 const fs = require('fs')
 const path = require('path')
 const chalk = require('chalk')
+const stripJsonComments = require('strip-json-comments')
 
 
 const mkdir = ( dirPath ) => {
@@ -37,7 +38,7 @@ const writeJson = ( file ) => {
         ))
       }
       var person = data.toString()
-      person = JSON.parse(person)
+      person = JSON.parse( stripJsonComments( person ) )
 
       if (_root) {
         let _findIndex = person.subPackages.findIndex(data => {
