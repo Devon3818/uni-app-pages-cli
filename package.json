@@ -1,8 +1,7 @@
 {
   "name": "uni-app-pages-cli",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "uni-app pages cli",
-  "main": "index.js",
   "dependencies": {
     "chalk": "^4.1.0",
     "commander": "^5.1.0",

@@ -33,9 +33,10 @@ const writeJson = ( file ) => {
 
   fs.readFile(file, function(err,data) {
       if(err){
-        return console.log(chalk.red(
+        console.log(chalk.red(
           err
         ))
+        process.exit(1)
       }
       var person = data.toString()
       person = JSON.parse( stripJsonComments( person ) )
@@ -53,9 +54,10 @@ const writeJson = ( file ) => {
             })
 
             if (_findPathIndex != -1) {
-              return console.log(chalk.red(
+              console.log(chalk.red(
                 'The page already exists'
               ))
+              process.exit(1)
             }
 
             person.subPackages[_findIndex].pages.push({
@@ -65,9 +67,10 @@ const writeJson = ( file ) => {
               }
             })
           } else {
-            return console.log(chalk.red(
+            console.log(chalk.red(
               'The root directory for the subpackage already exists'
             ))
+            process.exit(1)
           }
         } else {
           person.subPackages.push({
@@ -87,9 +90,10 @@ const writeJson = ( file ) => {
           return page.path == `pages/${_path}/index`
         })
         if (_p.length) {
-          return console.log(chalk.red(
+          console.log(chalk.red(
             'The page already exists'
           ))
+          process.exit(1)
         } else {
           person.pages.push({
             path: `pages/${_path}/index`,
@@ -157,6 +161,7 @@ if (_root) {
             console.log(chalk.red(
               err
             ))
+            process.exit(1)
           } else {
             writeJson( _pagesJsonFile )
           }
@@ -176,6 +181,7 @@ if (_path && !_root) {
         console.log(chalk.red(
           err
         ))
+        process.exit(1)
       } else {
         writeJson( _pagesJsonFile )
       }
