@@ -8,7 +8,7 @@ const chalk = require('chalk')
 const stripJsonComments = require('strip-json-comments')
 
 
-const _tpl = fs.readFileSync(path.join(resolve('./'), 'template.vue'), 'utf8')
+const _tpl = fs.readFileSync(path.join(__dirname, 'template.vue'), 'utf8')
 
 const mkdir = ( dirPath ) => {
   return new Promise((resolve, reject) => {
