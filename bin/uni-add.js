@@ -31,6 +31,19 @@ const mkdir = ( dirPath ) => {
   })
 }
 
+const writeTpl = (_pathName) => {
+  fs.writeFile(path.join( _pathName, 'index.vue' ), _tpl, function(err) {
+    if(err){
+      console.log(chalk.red(
+        err
+      ))
+      process.exit(1)
+    } else {
+      writeJson( _pagesJsonFile )
+    }
+  })
+}
+
 const writeJson = ( file ) => {
 
   fs.readFile(file, function(err,data) {
@@ -121,9 +134,31 @@ const writeJson = ( file ) => {
   })
 }
 
+const checkFile = () => {
+  fs.access( _pagesJsonFile , (err) => {
+    if(err) {
+      console.log(chalk.red(
+        'pages.json file not found'
+      ))
+      process.exit(1)
+    }
+  })
+
+  fs.access( path.join(resolve('./'), 'pages') , (err) => {
+    if(err) {
+      console.log(chalk.red(
+        'pages directory does not exist'
+      ))
+      process.exit(1)
+    }
+  })
+}
+
 const _pagesJsonFile = path.join(resolve('./'), 'pages.json')
 
 let _root,_path
+
+checkFile()
 
 program
   .option('-v, --VERSION', 'version message')
@@ -134,59 +169,24 @@ program
 _root = program.root ? program.root : null
 _path = program.path ? program.path : null
 
-fs.access( _pagesJsonFile , (err) => {
-  if(err) {
-    console.log(chalk.red(
-      'pages.json file not found'
-    ))
-    process.exit(1)
-  }
-})
-
-fs.access( path.join(resolve('./'), 'pages') , (err) => {
-  if(err) {
-    console.log(chalk.red(
-      'pages directory does not exist'
-    ))
-    process.exit(1)
-  }
-})
-
 if (_root) {
   let _rootPath = path.join(resolve('./pages/'), _root)
   mkdir(_rootPath).then(() => {
     if (_path) {
       let _pathPath = path.join(_rootPath, _path)
       mkdir(_pathPath).then(() => {
-        fs.writeFile(path.join( _pathPath, 'index.vue' ), _tpl, function(err) {
-          if(err){
-            console.log(chalk.red(
-              err
-            ))
-            process.exit(1)
-          } else {
-            writeJson( _pagesJsonFile )
-          }
-        })
+        writeTpl( _pathPath )
       })
     } else {
       writeJson( _pagesJsonFile )
     }
   })
+  return
 }
 
-if (_path && !_root) {
+if (_path) {
   let _pathPath = path.join(resolve('./pages/'), _path)
   mkdir(_pathPath).then(() => {
-    fs.writeFile(path.join( _pathPath, 'index.vue' ), _tpl, function(err) {
-      if(err){
-        console.log(chalk.red(
-          err
-        ))
-        process.exit(1)
-      } else {
-        writeJson( _pagesJsonFile )
-      }
-    })
+    writeTpl( _pathPath )
   })
 }
