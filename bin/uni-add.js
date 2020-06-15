@@ -178,7 +178,7 @@ if (_root) {
 if (_path && !_root) {
   let _pathPath = path.join(resolve('./pages/'), _path)
   mkdir(_pathPath).then(() => {
-    fs.writeFile(path.join( _pathPath, 'index.vue' ), '', function(err) {
+    fs.writeFile(path.join( _pathPath, 'index.vue' ), _tpl, function(err) {
       if(err){
         console.log(chalk.red(
           err

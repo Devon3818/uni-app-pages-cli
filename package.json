@@ -1,6 +1,6 @@
 {
   "name": "uni-app-pages-cli",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "uni-app pages cli",
   "dependencies": {
     "chalk": "^4.1.0",
