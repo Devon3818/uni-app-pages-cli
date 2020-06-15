@@ -8,6 +8,8 @@ const chalk = require('chalk')
 const stripJsonComments = require('strip-json-comments')
 
 
+const _tpl = fs.readFileSync(path.join(resolve('./'), 'template.vue'), 'utf8')
+
 const mkdir = ( dirPath ) => {
   return new Promise((resolve, reject) => {
     fs.access( dirPath, (err) => {
@@ -63,7 +65,7 @@ const writeJson = ( file ) => {
             person.subPackages[_findIndex].pages.push({
               path: `${_path}/index`,
               style: {
-                navigationBarTitleText: _path
+                navigationBarTitleText: ''
               }
             })
           } else {
@@ -78,7 +80,7 @@ const writeJson = ( file ) => {
             "pages": _path ? [{
               path: `${_path}/index`,
               style: {
-                navigationBarTitleText: _path
+                navigationBarTitleText: ''
               }
             }] : []
           })
@@ -98,7 +100,7 @@ const writeJson = ( file ) => {
           person.pages.push({
             path: `pages/${_path}/index`,
             style: {
-              navigationBarTitleText: _path
+              navigationBarTitleText: ''
             }
           })
         }
@@ -156,7 +158,7 @@ if (_root) {
     if (_path) {
       let _pathPath = path.join(_rootPath, _path)
       mkdir(_pathPath).then(() => {
-        fs.writeFile(path.join( _pathPath, 'index.vue' ), '', function(err) {
+        fs.writeFile(path.join( _pathPath, 'index.vue' ), _tpl, function(err) {
           if(err){
             console.log(chalk.red(
               err
